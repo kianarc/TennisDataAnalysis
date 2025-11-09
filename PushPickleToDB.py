@@ -117,14 +117,9 @@ def convert_to_python_types(value):
     """Convert numpy types to native Python types"""
     import numpy as np
     
-    # Handle None and NaN first
-    if value is None:
-        return None
     if pd.isna(value):
         return None
-    
-    # Convert numpy types
-    if isinstance(value, (np.integer, np.int64, np.int32, np.int16, np.int8)):
+    elif isinstance(value, (np.integer, np.int64, np.int32, np.int16, np.int8)):
         return int(value)
     elif isinstance(value, (np.floating, np.float64, np.float32, np.float16)):
         return float(value)
@@ -132,8 +127,6 @@ def convert_to_python_types(value):
         return bool(value)
     elif isinstance(value, np.ndarray):
         return value.tolist()
-    elif isinstance(value, str):
-        return value
     else:
         return value
 
